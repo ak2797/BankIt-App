@@ -101,6 +101,12 @@ def AccountSearch():
     else:   
         return render_template('account-Search.html')
 
+@app.route('/deposit')
+def deposit():
+    return render_template('deposit.html')
+@app.route('/withdraw')
+def withdraw():
+    return render_template('withdraw.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

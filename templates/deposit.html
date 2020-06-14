@@ -1,0 +1,75 @@
+
+  {% extends 'base.html' %}
+  
+  {% block body %}
+  <!-- ======= Hero Section ======= -->
+
+    <!-- ======= Contact Section ======= -->
+    <head>
+    	<title>Deposit</title>
+    </head>
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          
+          <p>Deposit</p>
+        </div>
+
+        <div class="row">
+
+          
+
+          <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
+
+            <form action="forms/depo.php" method="post" role="form" class="php-email-form">
+              <table class="table">
+          	<tr>
+          		<td><div class="form-group"><div><h4>Customer ID</h4></div></div></td>
+          		<td><div class="form-group">
+                <input type="text" class="form-control" name="cid" id="cid" placeholder="Customer ID" />
+              </div>
+          </td>
+          	</tr>
+          	<tr>
+          		<td><div class="form-group"><div><h4>Account ID</h4></div></div></td>
+          		<td><div class="form-group">
+                <input type="text" class="form-control" name="aid" id="aid" placeholder="Account ID" />
+              </div>
+          </td>
+          	</tr>
+          	<tr>
+          		<td><div class="form-group"><div><h4>Account Type</h4></div></div></td>
+          		<td><div class="form-group">
+                <input type="text" class="form-control" name="atype" id="atype" placeholder="Account Type" />
+              </div>
+          </td>
+          	</tr>
+          	<tr>
+          		<td><div class="form-group"><div><h4>Balance</h4></div></div></td>
+          		<td><div class="form-group">
+                <input type="text" class="form-control" name="balance" id="balance" placeholder="Balance" />
+              </div>
+          </td>
+          	</tr>
+          	<tr>
+          		<td><div class="form-group"><div><h4>Deposit Amount</h4></div></div></td>
+          		<td><div class="form-group">
+                <input type="text" class="form-control" name="dep" id="dep" placeholder="Deposit Amount" />
+              </div>
+          </td>
+          	</tr>
+          </table>
+              
+              <div class="text-center"><button type="submit">Submit</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+  {% endblock %}
