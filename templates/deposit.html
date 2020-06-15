@@ -27,39 +27,52 @@
         </div>
 
         <div class="row">
-
+          {% if result %}
+                {% if result[0] == null %}
+                <p style="text-align: center; font-family: 'Poppins', sans-serif;">Sorry, No account was found</p>
+                {% else %}
           
 
           <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
 
-            <form action="forms/depo.php" method="post" role="form" class="php-email-form">
+            <form action="/update" method="post" role="form" class="php-email-form">
               <table class="table">
+                {% for row in result %}
           	<tr>
           		<td><div class="form-group"><div><h4>Customer ID</h4></div></div></td>
           		<td><div class="form-group">
-                <input type="text" class="form-control" name="cid" id="cid" placeholder="Customer ID" />
+                <p type="text" class="form-control" name="cid" id="cid" placeholder="Customer ID">{{row.id}} </p>
               </div>
           </td>
           	</tr>
           	<tr>
           		<td><div class="form-group"><div><h4>Account ID</h4></div></div></td>
           		<td><div class="form-group">
-                <input type="text" class="form-control" name="aid" id="aid" placeholder="Account ID" />
+                <p type="text" class="form-control" name="aid" id="aid" placeholder="Account ID">{{row.accountId}}</p>
               </div>
           </td>
           	</tr>
           	<tr>
           		<td><div class="form-group"><div><h4>Account Type</h4></div></div></td>
           		<td><div class="form-group">
-                <input type="text" class="form-control" name="atype" id="atype" placeholder="Account Type" />
+                <p type="text" class="form-control" name="atype" id="atype" placeholder="Account Type"> 
+
+                  {% if row.account_type == 'S' %}
+                            Savings
+                        {% else %}
+                        Current
+                  {% endif %}
+                </p>
               </div>
           </td>
           	</tr>
           	<tr>
           		<td><div class="form-group"><div><h4>Balance</h4></div></div></td>
           		<td><div class="form-group">
-                <input type="text" class="form-control" name="balance" id="balance" placeholder="Balance" />
+                <p type="text" class="form-control" name="balance" id="balance" placeholder="Balance"> {{row.accountBalance}}</p>
               </div>
+              <input type="hidden" value="{{row.accountBalance}}" name="oldbalance">
+              <input type="hidden" value="{{row.accountId}}" name="accid">
           </td>
           	</tr>
           	<tr>
@@ -69,17 +82,30 @@
               </div>
           </td>
           	</tr>
+              {% endfor %}
           </table>
               
-              <div class="text-center"><button type="submit">Submit</button></div>
+              <div class="text-center"><button type="submit" id="submit">Submit</button></div>
             </form>
-
+            {% endif %}
           </div>
-
+          {% endif %}
         </div>
 
       </div>
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
+  <script type="text/javascript">
+  function get_current_url() {
+    var url=window.location.href;
+    return url
+}
+
+$(window).on('load',function(){
+    var current_url=document.getElementsByClassName('Deposit')[0];
+    current_url.value=get_current_url();
+
+})
+  </script>
   {% endblock %}

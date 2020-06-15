@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+import json
 # ###########################
 # Database Configuration
 # 
@@ -101,9 +101,26 @@ def AccountSearch():
     else:   
         return render_template('account-Search.html')
 
-@app.route('/deposit')
+@app.route('/Deposit', methods=['GET', 'POST'])
 def deposit():
-    return render_template('deposit.html')
+    if request.method == 'POST':
+        accid = request.form['accid']
+        results = db.session.query(Customer).filter(Customer.accountId == accid)
+        return render_template('Deposit.html',result=results)
+
+@app.route("/update", methods=["GET","POST"])
+def update():
+    if request.method == 'POST':
+        newb = request.form.get("dep")
+        oldb = request.form.get("oldbalance")
+        accid=request.form.get("accid")
+        cust = Customer.query.filter_by(accountId=accid).first()
+        cust.accountBalance = (int)(oldb)+(int)(newb)
+        db.session.commit()
+    all_account = Customer.query.all()
+    return redirect("/AccountStatus")
+
+
 @app.route('/withdraw')
 def withdraw():
     return render_template('withdraw.html')
