@@ -195,7 +195,7 @@ def transferupdates():
         
         if(accid == tacc):
 
-            scust.message="Transfer failed"
+            scust.message="Transfer failed because source and target accounts are same."
         if(scust is None or tcust is None):
             scust.message="Transfer failed.Check Account IDs"
         elif(int(scust.accountBalance)-int(tran) < 0 ):

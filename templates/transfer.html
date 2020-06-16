@@ -225,11 +225,7 @@ $('#submitt').on('click',(e)=>{e.preventDefault()
               console.log("Error is: " + err.statusText);
             }
           });
-   if($("input[id=sacc]").val()  === $("input[id=tacc]").val())
-   {
-    alert("Source and Target Account cannot be same.")
-   }
-   
+   alert("Check Message in Account Status for Status of Transfer")
    window.location.replace("/AccountStatus")
            })
  
