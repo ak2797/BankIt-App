@@ -40,7 +40,7 @@
           	<tr>
           		<td><div class="form-group"><div><h4>Customer ID</h4></div></div></td>
           		<td><div class="form-group">
-                <p type="text" class="form-control" name="cid" id="cid" placeholder="Customer ID">{{row.id}} </p>
+                <p type="text" class="form-control" name="cid" id="cid" placeholder="Customer ID">{{row.cid}} </p>
               </div>
           </td>
           	</tr>
@@ -115,6 +115,7 @@
               console.log("Error is: " + err.statusText);
             }
           });
+   alert("Deposit success");
    window.location.replace("/AccountStatus")
            })
  
