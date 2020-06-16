@@ -2,7 +2,7 @@
 
 
 {% block title %}
-<title>BankIt | Deposit</title>
+<title>BankIt | Trransfer</title>
 {% endblock %}
 
 {% block style %}
@@ -22,7 +22,7 @@
 
         <div class="section-title" data-aos="fade-up">
           
-          <p>Deposit</p>
+          <p>Transfer Money</p>
         </div>
 
         <div class="row">
@@ -44,40 +44,34 @@
               </div>
           </td>
           	</tr>
-          	<tr>
-          		<td><div class="form-group"><div><h4>Account ID</h4></div></div></td>
-          		<td><div class="form-group">
-                <p type="text" class="form-control" name="aid" id="aid" placeholder="Account ID">{{row.accountId}}</p>
-              </div>
-          </td>
-          	</tr>
-          	<tr>
-          		<td><div class="form-group"><div><h4>Account Type</h4></div></div></td>
-          		<td><div class="form-group">
-                <p type="text" class="form-control" name="atype" id="atype" placeholder="Account Type"> 
 
-                  {% if row.account_type == 'S' %}
-                            Savings
-                        {% else %}
-                        Current
-                  {% endif %}
-                </p>
+
+            <tr>
+              <td><div class="form-group"><div><h4>Source Account Type</h4></div></div></td>
+              <td><div class="form-group">
+                <select class="form-control" name="stype" id="stype">
+                  <option value="ssave">Savings</option>
+                  <option value="scurr">Current</option>
+                </select>
               </div>
           </td>
-          	</tr>
-          	<tr>
-          		<td><div class="form-group"><div><h4>Balance</h4></div></div></td>
-          		<td><div class="form-group">
-                <p type="text" class="form-control" name="balance" id="balance" placeholder="Balance"> {{row.accountBalance}}</p>
+            </tr>
+            <tr>
+              <td><div class="form-group"><div><h4>Target Account Type</h4></div></div></td>
+              <td><div class="form-group">
+                <select class="form-control" name="ttype" id="ttype">
+                  <option value="ssave">Savings</option>
+                  <option value="scurr">Current</option>
+                </select>
               </div>
-              <input type="hidden" value="{{row.accountBalance}}" name="oldbalance" id="ob">
-              <input type="hidden" value="{{row.accountId}}" name="accid" id="ai">
           </td>
-          	</tr>
+            </tr>
+          	
+          	
           	<tr>
-          		<td><div class="form-group"><div><h4>Deposit Amount</h4></div></div></td>
+          		<td><div class="form-group"><div><h4>Transfer Amount</h4></div></div></td>
           		<td><div class="form-group">
-                <input type="text" class="form-control" name="dep" id="dep" placeholder="Deposit Amount" />
+                <input type="text" class="form-control" name="dep" id="dep" placeholder="Transfer Amount" />
               </div>
           </td>
           	</tr>
@@ -96,8 +90,8 @@
 <script type="text/javascript">
   $('#submit').on('click',(e)=>{e.preventDefault()
     let postData={
-      'oldbalance' : $("input[id=ob]").val(),
-      'accid' :$("input[id=ai]").val(),
+      'stype' : $("input[id=stype]").val(),
+      'ttype' :$("input[id=ttype]").val(),
       'dep' :$("input[id=dep]").val()
 
     }

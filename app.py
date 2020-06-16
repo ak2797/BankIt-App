@@ -66,7 +66,7 @@ def CustomerStatus():
     all_customer = Customer.query.all()
     return render_template('customer-Status.html', rows=all_customer)
 
-@app.route('/AccountStatus')
+@app.route('/AccountStatus',methods=['GET','POST'])
 def AccountStatus():
     all_account = Customer.query.all()
     return render_template('account-Status.html', rows=all_account)
@@ -108,22 +108,44 @@ def deposit():
         results = db.session.query(Customer).filter(Customer.accountId == accid)
         return render_template('Deposit.html',result=results)
 
-@app.route("/update", methods=["GET","POST"])
+@app.route("/update", methods=["POST",'GET'])
 def update():
     if request.method == 'POST':
-        newb = request.form.get("dep")
-        oldb = request.form.get("oldbalance")
-        accid=request.form.get("accid")
+        newb = request.form["dep"]
+        oldb = request.form["oldbalance"]
+        accid=request.form["accid"]
         cust = Customer.query.filter_by(accountId=accid).first()
         cust.accountBalance = (int)(oldb)+(int)(newb)
         db.session.commit()
-    all_account = Customer.query.all()
-    return redirect("/AccountStatus")
+        return redirect("/AccountStatus")
+
+@app.route("/withdrawupdate", methods=["POST",'GET'])
+def withdrawupdate():
+    if request.method == 'POST':
+        newb = request.form["dep"]
+        oldb = request.form["oldbalance"]
+        accid=request.form["accid"]
+        cust = Customer.query.filter_by(accountId=accid).first()
+        cust.accountBalance = (int)(oldb)-(int)(newb)
+        print("ok")
+        db.session.commit()
+        return redirect("/AccountStatus")
+    
 
 
-@app.route('/withdraw')
+@app.route('/Withdraw',methods=["POST",'GET'])
 def withdraw():
-    return render_template('withdraw.html')
+    if request.method == 'POST':
+        accid = request.form['accid']
+        results = db.session.query(Customer).filter(Customer.accountId == accid)
+        return render_template('withdraw.html',result=results)
 
+
+@app.route('/Transfer',methods=["POST",'GET'])
+def transfer():
+    if request.method == 'POST':
+        accid = request.form['accid']
+        results = db.session.query(Customer).filter(Customer.accountId == accid)
+        return render_template('transfer.html',result=results)
 if __name__ == '__main__':
     app.run(debug=True)
